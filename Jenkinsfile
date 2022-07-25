@@ -1,8 +1,12 @@
 pipeline {
   agent any
+  tools { 
+      maven 'Alexa-maven' 
+  }
   stages {
     stage('Initialize') {
       steps {
+        git url:'https://github.com/timmychien/alexa-cicd'
         echo 'Starting the pipeline'
         sh 'mvn clean'
       }
@@ -20,10 +24,9 @@ pipeline {
     stage('Deploy') {
       steps {
         archiveArtifacts 'target/*.war'
-        sh '''aws --debug s3 cp /var/lib/jenkins/workspace/alexa-cicd_master/target/alexa-cicd-0.0.1-SNAPSHOT.war s3://elasticbeanstalk-us-east-1-593614531934/2018362ew4-alexa-cicd-0.0.1-SNAPSHOT.war 
-'''
-        sh 'aws --debug elasticbeanstalk create-application-version --application-name alexacicd --version-label "alexacicd-jenkins$BUILD_DISPLAY_NAME" --description "Created by $BUILD_TAG"  --source-bundle=S3Bucket=elasticbeanstalk-us-east-1-593614531934,S3Key=2018362ew4-alexa-cicd-0.0.1-SNAPSHOT.war'
-        sh 'aws elasticbeanstalk update-environment --environment-name=Alexacicd-env --version-label "alexacicd-jenkins$BUILD_DISPLAY_NAME"'
+        sh 'az login --service-principal -u <client_ID> -p <client_SECRET> -t <tenant_ID>'
+        sh 'az storage blob upload --account-name "alexalab" --account-key "<storage_account_key>" --container-name lab-container --file "/var/lib/jenkins/workspace/alexa-cicd_master/target/alexa-cicd-0.0.1-SNAPSHOT.war" --name "alexa-cicd-0.01-SNATSHOT.war" --overwrite=True'
+        sh 'az webapp create --resource-group "lab-rg" --plan "lab-service-plan" --name "alexa-cicd-test" --runtime "TOMCAT:10.0-java11"'
       }
     }
   }
