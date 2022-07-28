@@ -55,7 +55,7 @@
 				<configuration>
 					<resourceGroup>lab-rg</resourceGroup>
 					<appName>alexa-cicd-test</appName>
-					<linuxRuntime>tomcat 10.0-java11</linuxRuntime>
+					<linuxRuntime>tomcat 8.5-java11</linuxRuntime>
 				</configuration>
 			</plugin>
 		</plugins>
