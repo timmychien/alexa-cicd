@@ -64,7 +64,7 @@
 					<appName>${azure}</appName>
 				</configuration>
 			</plugin>
-	</plugins>
+		</plugins>
 	</build>
 
 </project>
