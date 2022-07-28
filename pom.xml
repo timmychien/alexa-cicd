@@ -2,22 +2,24 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<plugin>
-    	<groupId>com.microsoft.azure</groupId>
-    	<artifactId>azure:azure-webapp-maven-plugin</artifactId>
-    	<version>${azure:azure-webapp-maven-plugin.version}</version>
-		<configuration>
-			<auth>
-				<type>service_principal</type>
-				<client>2810755c-7efb-4ab2-a249-56fb610c5129</client>
-				<tenant>e7b05220-4e84-4d11-aa22-83f2ff395a53</tenant>
-				<key>{W_p8Q~MEwVkjGyS52PLF4bTL_m6pp2xFs3ZedaHz}</key>
-				<environment>azure</environment>
-			</auth>
-			<!-- function app name -->
-			<appName>${azure}</appName>
-		</configuration>
-	</plugin>
+	<plugins>
+		<plugin>
+			<groupId>com.microsoft.azure</groupId>
+			<artifactId>azure:azure-webapp-maven-plugin</artifactId>
+			<version>${azure:azure-webapp-maven-plugin.version}</version>
+			<configuration>
+				<auth>
+					<type>service_principal</type>
+					<client>2810755c-7efb-4ab2-a249-56fb610c5129</client>
+					<tenant>e7b05220-4e84-4d11-aa22-83f2ff395a53</tenant>
+					<key>{W_p8Q~MEwVkjGyS52PLF4bTL_m6pp2xFs3ZedaHz}</key>
+					<environment>azure</environment>
+				</auth>
+				<!-- function app name -->
+				<appName>${azure}</appName>
+			</configuration>
+		</plugin>
+	</plugins>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
