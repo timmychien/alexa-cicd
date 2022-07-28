@@ -48,6 +48,22 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+			<groupId>com.microsoft.azure</groupId>
+				<artifactId>azure:azure-webapp-maven-plugin</artifactId>
+				<version>2.5.0</version>
+				<configuration>
+					<auth>
+						<type>service_principal</type>
+						<client>2810755c-7efb-4ab2-a249-56fb610c5129</client>
+						<tenant>e7b05220-4e84-4d11-aa22-83f2ff395a53</tenant>
+						<key>{W_p8Q~MEwVkjGyS52PLF4bTL_m6pp2xFs3ZedaHz}</key>
+						<environment>azure</environment>
+					</auth>
+					<!-- function app name -->
+					<appName>alexa-cicd-test</appName>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
